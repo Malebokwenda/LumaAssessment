@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ConcurrentTestSuite" parallel="tests">
+    <test name="ChromeTest">
+        <parameter name="browser" value="chrome" />
+<!--        <parameter name="browserUrl" value="https://luma.enablementadobe.com/content/luma/us/en.html" />-->
+        <!--        <groups>-->
+        <!--            <run>-->
+        <!--                <exclude name="validLogin"></exclude>-->
+        <!--                <exclude name="checkOut"></exclude>-->
+        <!--            </run>-->
+        <!--        </groups>-->
+        <classes>
+            <class name="application.BaseTests" />
+        </classes>
+    </test>
+<!--    <test name="EdgeTest">-->
+<!--        <parameter name="browser" value="edge"/>-->
+<!--        <parameter name="browserUrl" value="https://luma.enablementadobe.com/content/luma/us/en.html"/>-->
+<!--        <classes>-->
+<!--            <class name="application.BaseTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+</suite>
