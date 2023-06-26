@@ -43,17 +43,32 @@ public class Tees extends  BaseTests{
 
         Thread.sleep(2000);
 
-//        Find orange Miko Pullover Hoodie
-        Actions actions = new Actions(BaseTests.driver);
 
-        WebElement orangePullover = BaseTests.driver.findElement(By.xpath("(//img[@alt='Mars HeatTech™ Pullover'])[1]"));
-        actions.scrollToElement(orangePullover).click();
+
     }
     public static void pullOverItem(){
-//        Color
-        BaseTests.driver.findElement(By.id("option-label-color-93-item-56")).click();
+//        Actions actions = new Actions(BaseTests.driver);
+//
+//        WebElement orangePullover = BaseTests.driver.findElement(By.xpath("(//img[@alt='Miko Pullover Hoodie'])[1]"));
+//        actions.click(orangePullover);
+
+//                Find orange Miko Pullover Hoodie
+        BaseTests.driver.findElement(By.cssSelector("img[alt='Miko Pullover Hoodie']")).click();
+//                Color
+        WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
+        WebElement color= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@id='option-label-color-93-item-56'])[1]")));
+//        WebElement color =  BaseTests.driver.findElement(By.xpath("(//div[@id='option-label-color-93-item-56'])[1]"));
+        Actions actions = new Actions(BaseTests.driver);
+        actions.moveToElement(color).click().perform();
+
+//        BaseTests.driver.findElement(By.xpath("(//div[@id='option-label-color-93-item-56'])[1]")).click();
 //        Size
-        BaseTests.driver.findElement(By.id("option-label-size-143-item-168")).click();
+         wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
+        WebElement  size = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@id='option-label-size-143-item-168'])[1]")));
+        actions = new Actions(BaseTests.driver);
+        actions.moveToElement(size).click().perform();
+
+//        BaseTests.driver.findElement(By.xpath("(//div[@id='option-label-size-143-item-168'])[1]")).click();
     }
 
 

@@ -22,6 +22,15 @@ public class BaseTests {
     private String LastName;
     private String FirstName;
     private String productName;
+    private String BFirstName;
+    private String BLastName;
+    private String SCompany;
+    private String SCountry;
+    private String SAddress;
+    private String SCity;
+    private String SProvince;
+    private String SCode;
+    private String SPhone;
 
     @Parameters("browser")
     @BeforeClass
@@ -92,6 +101,16 @@ public class BaseTests {
     @Test(priority = 5)
     public void checkOut(){
         Cart.cartIcon();
+        BFirstName = Utilities.getCellData(1,1);
+        BLastName = Utilities.getCellData(1,2);
+        SCompany = Utilities.getCellData(1,8);
+        SCountry = Utilities.getCellData(1,9);
+        SAddress =  Utilities.getCellData(1,10);
+        SCity =  Utilities.getCellData(1,11);
+        SProvince = Utilities.getCellData(1,12);
+        SCode= String.valueOf(Utilities.getCellInt(1,13));
+        SPhone =String.valueOf(Utilities.getCellInt(1,14));
+        Checkout.shippingInfo( BFirstName,BLastName,  SCompany,  SCountry,  SAddress, SCity,  SProvince,  SCode,SPhone);
 
     }
 

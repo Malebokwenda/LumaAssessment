@@ -12,16 +12,15 @@ public class Cart extends BaseTests{
         BaseTests.driver.findElement(By.xpath("(//button[@id='product-addtocart-button'])[1]")).click();
     }
     public static void PulloverAddToCart(){
-        BaseTests.driver.findElement(By.xpath("(//button[@id='product-addtocart-button'])[1]")).click();
+        BaseTests.driver.findElement(By.xpath("(//span[contains(text(),'Add to Cart')])[1]")).click();
 
     }
     public static void cartIcon(){
         BaseTests.driver.findElement(By.xpath("(//a[@class='action showcart'])[1]")).click();
-
         Actions actions = new Actions(BaseTests.driver);
 
-        WebElement proceedToCheckout = BaseTests.driver.findElement(By.xpath("(//button[normalize-space()='Proceed to Checkout'])[1]"));
-        actions.moveToElement(proceedToCheckout).click();
+        WebElement proceedToCheckout = BaseTests.driver.findElement(By.cssSelector("#top-cart-btn-checkout"));
+        actions.moveToElement(proceedToCheckout).click().perform();
 
     }
 

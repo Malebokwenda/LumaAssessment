@@ -26,12 +26,12 @@ public class Validation extends BaseTests{
     public static void itemAddedToCart(){
         //         Wait for the error message to be displayed
         WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='message-success success message'])[1]")));
+        WebElement AddedMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[data-bind='html: $parent.prepareMessageForHtml(message.text)']")));
 
 //         Verify the error message
-        String expectedErrorMessage = "You added Mars HeatTech™ Pullover to your ";
-        String actualErrorMessage = errorMessage.getText();
-        Assert.assertEquals(actualErrorMessage, expectedErrorMessage);
+        String expectedAddedItemMessage = "You added Miko Pullover Hoodie to your shopping cart  ";
+        String actualAddedItemMessage = AddedMessage.getText();
+        Assert.assertEquals(expectedAddedItemMessage,expectedAddedItemMessage);
 
     }
 }
