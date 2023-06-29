@@ -22,8 +22,7 @@ public class BaseTests {
     private String LastName;
     private String FirstName;
     private String productName;
-    private String BFirstName;
-    private String BLastName;
+
     private String SCompany;
     private String SCountry;
     private String SAddress;
@@ -41,14 +40,12 @@ public class BaseTests {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(options);
 
-        }
-        else if (browser.equalsIgnoreCase("edge")) {
+        } else if (browser.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             driver = new EdgeDriver(options);
 
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("Invalid browser name: " + browser);
         }
         driver.manage().window().maximize();
@@ -57,7 +54,8 @@ public class BaseTests {
         excelData = new Utilities();
         Utilities.setupExcel();
     }
-//    @Test(priority = 1)
+
+    //    @Test(priority = 1)
 //    public void signUp(){
 //        FirstName = Utilities.getCellData(1,1);
 //        LastName = Utilities.getCellData(1,2);
@@ -74,44 +72,79 @@ public class BaseTests {
         Login.goTo();
 
     }
-//    @Test(priority = 2)
-//    public static void tees() throws InterruptedException {
-//        Tees.tees();
-//        Tees.threeStarsTee();
-//
-//
-//    }
-//    @Test(priority = 3)
-//    public static void addToCart(){
-//        Cart.threeStarsAddToCart();
-//        Validation.EmptyFields();
-//
-//    }
+    @Test(priority = 2)
+    public static void tees() throws InterruptedException {
+        Tees.tees();
+        Tees.threeStarsTee();
 
 
-    @Test(priority = 4)
-    public void pullOverAddToCart() throws InterruptedException {
+    }
+    @Test(priority = 3)
+    public static void addToCart(){
+        Cart.threeStarsAddToCart();
+        Validation.EmptyFields();
+
+    }
+
+
+        @Test(priority = 4)
+        public void pullOverAddToCart() throws InterruptedException {
+            Login.goTo();
+            productName = Utilities.getCellData(1,5);
+            Tees.searchForItem(productName);
+            Tees.pullOverItem();
+            Cart.PulloverAddToCart();
+            Validation.itemAddedToCart();
+        }
+       @Test(priority = 5)
+        public void checkOut(){
+            Cart.cartIcon();
+            FirstName = Utilities.getCellData(1,1);
+            LastName = Utilities.getCellData(1,2);
+            SCompany = Utilities.getCellData(1,8);
+            SCountry = Utilities.getCellData(1,9);
+            SAddress =  Utilities.getCellData(1,10);
+            SCity =  Utilities.getCellData(1,11);
+            SProvince = Utilities.getCellData(1,12);
+            SCode= String.valueOf(Utilities.getCellInt(1,13));
+            SPhone =String.valueOf(Utilities.getCellInt(1,14));
+            Checkout.shippingInfo( FirstName,LastName,  SCompany,  SCountry,  SAddress, SCity,  SProvince,  SCode,SPhone);
+
+        }
+
+
+    @Test(priority = 6)
+    public void hotSellersCompare() {
         Login.goTo();
-        productName = Utilities.getCellData(1,5);
-        Tees.searchForItem(productName);
-        Tees.pullOverItem();
-        Cart.PulloverAddToCart();
-        Validation.itemAddedToCart();
+        CompareProducts.hotSellersScroll();
+        CompareProducts.CompareIcon();
+        CompareProducts.compareListLink();
     }
-    @Test(priority = 5)
-    public void checkOut(){
-        Cart.cartIcon();
-        BFirstName = Utilities.getCellData(1,1);
-        BLastName = Utilities.getCellData(1,2);
-        SCompany = Utilities.getCellData(1,8);
-        SCountry = Utilities.getCellData(1,9);
-        SAddress =  Utilities.getCellData(1,10);
-        SCity =  Utilities.getCellData(1,11);
-        SProvince = Utilities.getCellData(1,12);
-        SCode= String.valueOf(Utilities.getCellInt(1,13));
-        SPhone =String.valueOf(Utilities.getCellInt(1,14));
-        Checkout.shippingInfo( BFirstName,BLastName,  SCompany,  SCountry,  SAddress, SCity,  SProvince,  SCode,SPhone);
+
+    @Test(priority = 7)
+    public void compareOnImgClicked() {
+        Login.goTo();
+        CompareProducts.hotSellersScroll();
+        CompareProducts.compareOnImgClicked();
+        Validation.compareSuccessText();
+        CompareProducts.compareListLink();
 
     }
 
+    @Test(priority = 8)
+    public static void weatherTankProduct() {
+        Login.goTo();
+        CompareProducts.hotSellersScroll();
+        CompareProducts.weatherTankProduct();
+        CompareProducts.compareListLink();
+        CompareProducts.removeComparedItem();
+    }
+    @Test(priority = 9)
+    public static void heroHoodie(){
+        Login.goTo();
+        CompareProducts.hotSellersScroll();
+        Tees.heroHoodie();
+        Cart.heroHoodieCart();
+
+    }
 }

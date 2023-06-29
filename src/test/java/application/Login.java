@@ -8,23 +8,25 @@ public class Login extends BaseTests{
     WebDriver driver = BaseTests.driver;
 
 
-//    public static void signUp(String FirstName, String LastName, String password, String Email){
-//
-//        BaseTests.driver.findElement(By.xpath("(//a[normalize-space()='Create an Account'])[1]")).click();
-//        WebElement firstNameInput =BaseTests.driver.findElement(By.name("firstname"));
-//        firstNameInput.sendKeys(FirstName);
-//
-//        WebElement lastNameInput =BaseTests.driver.findElement(By.name("lastname"));
-//        lastNameInput.sendKeys(LastName);
-//
-//        WebElement emailInput =BaseTests.driver.findElement(By.id("email_address"));
-//        emailInput.sendKeys(Email);
-//
-//        BaseTests.driver.findElement(By.id("password")).sendKeys(password);
-//
-//        BaseTests.driver.findElement(By.id("password-confirmation")).sendKeys(password);
-//        BaseTests.driver.findElement(By.xpath("(//button[@title='Create an Account'])[1]")).click();
-//    }
+    /* public static void signUp(String FirstName, String LastName, String password, String Email){
+
+        BaseTests.driver.findElement(By.xpath("(//a[normalize-space()='Create an Account'])[1]")).click();
+        WebElement firstNameInput =BaseTests.driver.findElement(By.name("firstname"));
+        firstNameInput.sendKeys(FirstName);
+
+        WebElement lastNameInput =BaseTests.driver.findElement(By.name("lastname"));
+        lastNameInput.sendKeys(LastName);
+
+        WebElement emailInput =BaseTests.driver.findElement(By.id("email_address"));
+        emailInput.sendKeys(Email);
+
+        BaseTests.driver.findElement(By.id("password")).sendKeys(password);
+
+        BaseTests.driver.findElement(By.id("password-confirmation")).sendKeys(password);
+        BaseTests.driver.findElement(By.xpath("(//button[@title='Create an Account'])[1]")).click();
+    }
+
+     */
 
     public static void signIn(String Email, String password){
         BaseTests.driver.findElement(By.xpath("(//a[contains(text(),'Sign In')])[1]")).click();

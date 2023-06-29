@@ -12,6 +12,7 @@ import java.time.Duration;
 public class Tees extends  BaseTests{
 
     WebDriver driver = BaseTests.driver;
+    static WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
 
     public static void tees() throws InterruptedException {
         Actions actions = new Actions(BaseTests.driver);
@@ -30,7 +31,8 @@ public class Tees extends  BaseTests{
 
     public static void threeStarsTee(){
 //       find 3 stars product item  to adds to cart
-        BaseTests.driver.findElement(By.xpath("/html[1]/body[1]/div[1]/main[1]/div[3]/div[1]/div[3]/ol[1]/li[3]/div[1]/a[1]/span[1]/span[1]/img[1]")).click();
+        BaseTests.driver.findElement(By.xpath("/html[1]/body[1]/div[1]/main[1]/div[3]/div[1]/div[3]" +
+                "/ol[1]/li[3]/div[1]/a[1]/span[1]/span[1]/img[1]")).click();
 
     }
 
@@ -47,28 +49,34 @@ public class Tees extends  BaseTests{
 
     }
     public static void pullOverItem(){
-//        Actions actions = new Actions(BaseTests.driver);
-//
-//        WebElement orangePullover = BaseTests.driver.findElement(By.xpath("(//img[@alt='Miko Pullover Hoodie'])[1]"));
-//        actions.click(orangePullover);
 
 //                Find orange Miko Pullover Hoodie
-        BaseTests.driver.findElement(By.cssSelector("img[alt='Miko Pullover Hoodie']")).click();
-//                Color
-        WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
-        WebElement color= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@id='option-label-color-93-item-56'])[1]")));
-//        WebElement color =  BaseTests.driver.findElement(By.xpath("(//div[@id='option-label-color-93-item-56'])[1]"));
-        Actions actions = new Actions(BaseTests.driver);
-        actions.moveToElement(color).click().perform();
-
-//        BaseTests.driver.findElement(By.xpath("(//div[@id='option-label-color-93-item-56'])[1]")).click();
+        BaseTests.driver.findElement(By.xpath("//*[@id=\"maincontent\"]/div[3]/div[1]/div[2]/div[2]" +
+                "/ol/li[1]/div/a/span/span/img")).click();
 //        Size
-         wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
-        WebElement  size = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@id='option-label-size-143-item-168'])[1]")));
-        actions = new Actions(BaseTests.driver);
+
+        WebElement  size = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("(//div[@id='option-label-size-143-item-168'])[1]")));
+        Actions actions = new Actions(BaseTests.driver);
         actions.moveToElement(size).click().perform();
 
-//        BaseTests.driver.findElement(By.xpath("(//div[@id='option-label-size-143-item-168'])[1]")).click();
+//                    Color
+        WebElement color= wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("(//div[@id='option-label-color-93-item-56'])[1]")));
+         actions = new Actions(BaseTests.driver);
+        actions.moveToElement(color).click().perform();
+    }
+
+    public static void  heroHoodie(){
+//        size
+         WebElement hoodieSize = wait.until(ExpectedConditions.visibilityOfElementLocated
+                 (By.xpath("(//div[@id='option-label-size-143-item-168'])[4]")));
+                 hoodieSize.click();
+//        color
+        WebElement hoodieColor = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("(//div[@id='option-label-color-93-item-53'])[1]")));
+        hoodieColor.click();
+
     }
 
 

@@ -23,6 +23,10 @@ public class Cart extends BaseTests{
         actions.moveToElement(proceedToCheckout).click().perform();
 
     }
+    public static  void heroHoodieCart(){
+        BaseTests.driver.findElement(By.xpath("//*[@id=\"maincontent\"]/div[3]/div/div[2]/div[3]/div/div/ol/li[4]/div/div/div[3]/div/div[1]/form/button")).click();
+
+    }
 
 
 }
