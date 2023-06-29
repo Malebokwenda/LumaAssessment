@@ -1,4 +1,5 @@
 package application;
+import extentReport.ExtentReport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import java.time.Duration;
 public class Tees extends  BaseTests{
 
     WebDriver driver = BaseTests.driver;
+
     static WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
 
     public static void tees() throws InterruptedException {

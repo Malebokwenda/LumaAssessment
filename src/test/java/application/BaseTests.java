@@ -1,17 +1,23 @@
 package application;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import extentReport.ExtentReport;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import utilities.Utilities;
 
 import java.io.IOException;
+
+import static extentReport.ExtentReport.extent;
+import static extentReport.ExtentReport.getScreenshotAsBase64;
 
 public class BaseTests {
     public static WebDriver driver;
@@ -30,7 +36,17 @@ public class BaseTests {
     private String SProvince;
     private String SCode;
     private String SPhone;
+    private ITestResult result;
 
+    @BeforeSuite
+    public static void beforeSuite() {
+        ExtentReport.initReports();
+    }
+
+    @AfterSuite
+    public static void afterSuite() throws IOException {
+        ExtentReport.flushReports();
+    }
     @Parameters("browser")
     @BeforeClass
     public void setUp(String browser) throws IOException {
@@ -55,39 +71,28 @@ public class BaseTests {
         Utilities.setupExcel();
     }
 
-    //    @Test(priority = 1)
-//    public void signUp(){
-//        FirstName = Utilities.getCellData(1,1);
-//        LastName = Utilities.getCellData(1,2);
-//        Email = Utilities.getCellData(1,4);
-//        password = Utilities.getCellData(1,3);
-//        Login.signUp(FirstName,LastName,Email,password);
-//
-//    }
     @Test(priority = 1)
-    public void signIn(){
+    public void signIn() throws IOException {
         Email = Utilities.getCellData(1,3);
         password = Utilities.getCellData(1,4);
         Login.signIn(Email,password);
         Login.goTo();
-
     }
     @Test(priority = 2)
-    public static void tees() throws InterruptedException {
+    public static void tees() throws InterruptedException, IOException {
         Tees.tees();
         Tees.threeStarsTee();
-
-
-    }
-    @Test(priority = 3)
-    public static void addToCart(){
         Cart.threeStarsAddToCart();
         Validation.EmptyFields();
+        Thread.sleep(2500);
+
 
     }
 
 
-        @Test(priority = 4)
+
+
+      /*  @Test(priority = 3)
         public void pullOverAddToCart() throws InterruptedException {
             Login.goTo();
             productName = Utilities.getCellData(1,5);
@@ -96,9 +101,10 @@ public class BaseTests {
             Cart.PulloverAddToCart();
             Validation.itemAddedToCart();
         }
-       @Test(priority = 5)
+       @Test(priority = 4)
         public void checkOut(){
             Cart.cartIcon();
+
             FirstName = Utilities.getCellData(1,1);
             LastName = Utilities.getCellData(1,2);
             SCompany = Utilities.getCellData(1,8);
@@ -113,7 +119,7 @@ public class BaseTests {
         }
 
 
-    @Test(priority = 6)
+    @Test(priority = 5)
     public void hotSellersCompare() {
         Login.goTo();
         CompareProducts.hotSellersScroll();
@@ -121,7 +127,7 @@ public class BaseTests {
         CompareProducts.compareListLink();
     }
 
-    @Test(priority = 7)
+    @Test(priority = 6)
     public void compareOnImgClicked() {
         Login.goTo();
         CompareProducts.hotSellersScroll();
@@ -131,7 +137,7 @@ public class BaseTests {
 
     }
 
-    @Test(priority = 8)
+    @Test(priority = 7)
     public static void weatherTankProduct() {
         Login.goTo();
         CompareProducts.hotSellersScroll();
@@ -139,12 +145,18 @@ public class BaseTests {
         CompareProducts.compareListLink();
         CompareProducts.removeComparedItem();
     }
-    @Test(priority = 9)
+    @Test(priority = 8)
     public static void heroHoodie(){
         Login.goTo();
         CompareProducts.hotSellersScroll();
         Tees.heroHoodie();
         Cart.heroHoodieCart();
 
+    }
+
+    */
+    @AfterClass
+    public void tearDown(){
+        driver.quit();
     }
 }
