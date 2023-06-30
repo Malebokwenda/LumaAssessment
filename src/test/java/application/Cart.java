@@ -12,8 +12,7 @@ import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
 
-import static extentReport.ExtentReport.extent;
-import static extentReport.ExtentReport.getScreenshotAsBase64;
+import static extentReport.ExtentReport.*;
 
 public class Cart extends BaseTests{
     WebDriver driver = BaseTests.driver;
@@ -32,7 +31,7 @@ public class Cart extends BaseTests{
         test.info("User adds a 3 stars product to cart");
 
         BaseTests.driver.findElement(By.xpath("(//button[@id='product-addtocart-button'])[1]")).click();
-        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshotAsBase64("AddToCart")).build());
+        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("AddToCart")).build());
     }
     public static void PulloverAddToCart(){
         BaseTests.driver.findElement(By.xpath("(//span[contains(text(),'Add to Cart')])[1]")).click();

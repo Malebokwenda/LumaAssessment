@@ -65,7 +65,6 @@ public class Tees extends  BaseTests{
 //                    Color
         WebElement color= wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("(//div[@id='option-label-color-93-item-56'])[1]")));
-         actions = new Actions(BaseTests.driver);
         actions.moveToElement(color).click().perform();
     }
 

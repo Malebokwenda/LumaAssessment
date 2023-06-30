@@ -11,8 +11,7 @@ import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
 
-import static extentReport.ExtentReport.extent;
-import static extentReport.ExtentReport.getScreenshotAsBase64;
+import static extentReport.ExtentReport.*;
 
 public class Login extends BaseTests{
     WebDriver driver = BaseTests.driver;
@@ -58,7 +57,7 @@ public class Login extends BaseTests{
 
         WebElement passwordInput = BaseTests.driver.findElement(By.xpath("(//input[@id='pass'])[1]"));
         passwordInput.sendKeys(password);
-        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshotAsBase64("SignIn")).build());
+        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("SignIn")).build());
 
         BaseTests.driver.findElement(By.xpath("(//span[contains(text(),'Sign In')])[1]")).click();
 
@@ -68,5 +67,6 @@ public class Login extends BaseTests{
     public static void goTo(){
         BaseTests.driver.findElement(By.xpath("(//img)[1]")).click();
     }
+
 
 }

@@ -17,7 +17,7 @@ import utilities.Utilities;
 import java.io.IOException;
 
 import static extentReport.ExtentReport.extent;
-import static extentReport.ExtentReport.getScreenshotAsBase64;
+import static extentReport.ExtentReport.getScreenshot;
 
 public class BaseTests {
     public static WebDriver driver;
@@ -77,6 +77,7 @@ public class BaseTests {
         password = Utilities.getCellData(1,4);
         Login.signIn(Email,password);
         Login.goTo();
+
     }
     @Test(priority = 2)
     public static void tees() throws InterruptedException, IOException {

@@ -58,7 +58,7 @@ public  class ExtentReport {
             test.log(Status.SKIP, result.getName());
         }
     }
-    public static String getScreenshotAsBase64(String testCaseName) throws IOException {
+    public static String getScreenshot(String testCaseName) throws IOException {
         File source = ((TakesScreenshot) BaseTests.driver).getScreenshotAs(OutputType.FILE);
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String fileName = "image_" + testCaseName + "_" + timestamp + ".png";
@@ -66,6 +66,7 @@ public  class ExtentReport {
         FileUtils.copyFile(source, new File(path));
         return path;
     }
+
 
 
 //    public static String getScreenshotAsBase64() throws IOException {
