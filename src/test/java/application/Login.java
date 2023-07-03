@@ -24,29 +24,6 @@ public class Login extends BaseTests{
     public static void afterSuite() throws IOException {
         ExtentReport.flushReports();
     }
-
-
-
-    /* public static void signUp(String FirstName, String LastName, String password, String Email){
-
-        BaseTests.driver.findElement(By.xpath("(//a[normalize-space()='Create an Account'])[1]")).click();
-        WebElement firstNameInput =BaseTests.driver.findElement(By.name("firstname"));
-        firstNameInput.sendKeys(FirstName);
-
-        WebElement lastNameInput =BaseTests.driver.findElement(By.name("lastname"));
-        lastNameInput.sendKeys(LastName);
-
-        WebElement emailInput =BaseTests.driver.findElement(By.id("email_address"));
-        emailInput.sendKeys(Email);
-
-        BaseTests.driver.findElement(By.id("password")).sendKeys(password);
-
-        BaseTests.driver.findElement(By.id("password-confirmation")).sendKeys(password);
-        BaseTests.driver.findElement(By.xpath("(//button[@title='Create an Account'])[1]")).click();
-    }
-
-     */
-
     public static void signIn(String Email, String password) throws IOException {
         ExtentTest test = extent.createTest("Sign In");
         test.info("User entered correct credentials");
@@ -57,7 +34,7 @@ public class Login extends BaseTests{
 
         WebElement passwordInput = BaseTests.driver.findElement(By.xpath("(//input[@id='pass'])[1]"));
         passwordInput.sendKeys(password);
-        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("SignIn")).build());
+        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("Sign In")).build());
 
         BaseTests.driver.findElement(By.xpath("(//span[contains(text(),'Sign In')])[1]")).click();
 

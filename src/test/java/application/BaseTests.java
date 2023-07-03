@@ -1,8 +1,5 @@
 package application;
 
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import extentReport.ExtentReport;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -13,11 +10,17 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utilities.Utilities;
+/*import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+ */
 
 import java.io.IOException;
 
 import static extentReport.ExtentReport.extent;
 import static extentReport.ExtentReport.getScreenshot;
+
+@Listeners(extentReport.ExtentTestNGListener.class)
 
 public class BaseTests {
     public static WebDriver driver;
@@ -28,7 +31,6 @@ public class BaseTests {
     private String LastName;
     private String FirstName;
     private String productName;
-
     private String SCompany;
     private String SCountry;
     private String SAddress;
@@ -70,6 +72,7 @@ public class BaseTests {
         excelData = new Utilities();
         Utilities.setupExcel();
     }
+
 
     @Test(priority = 1)
     public void signIn() throws IOException {

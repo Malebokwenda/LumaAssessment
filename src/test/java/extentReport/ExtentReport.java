@@ -7,16 +7,12 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
-
 import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +26,6 @@ public  class ExtentReport {
     public static ExtentReports extent;
     private static ExtentSparkReporter spark;
     private static WebDriver driver;
-    private static ITestResult result;
     @BeforeSuite
     public static void initReports() {
         extent = new ExtentReports();
@@ -47,17 +42,6 @@ public  class ExtentReport {
         return test;
     }
 
-    @AfterMethod
-    public static void testResults(ITestResult result) {
-        ExtentTest test = createTest(result.getMethod().getMethodName());
-        if (result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, result.getName());
-        } else if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.FAIL, result.getThrowable());
-        } else {
-            test.log(Status.SKIP, result.getName());
-        }
-    }
     public static String getScreenshot(String testCaseName) throws IOException {
         File source = ((TakesScreenshot) BaseTests.driver).getScreenshotAs(OutputType.FILE);
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
