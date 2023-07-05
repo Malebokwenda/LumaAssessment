@@ -11,34 +11,37 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import java.awt.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Date;
 
 public  class ExtentReport {
 
     public static ExtentReports extent;
+     public static ExtentTest test;
     private static ExtentSparkReporter spark;
+   static String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+   static String faith ="C:/Users/digilink/Downloads/SeleniumRevision/LumaAssessment/src/test/java/extentReport/spark_" +timeStamp +".html";
     private static WebDriver driver;
     @BeforeSuite
     public static void initReports() {
         extent = new ExtentReports();
-        spark = new ExtentSparkReporter("C:/Users/digilink/Downloads/SeleniumRevision/LumaAssessment/src/test/java/extentReport/spark.html");
+        spark = new ExtentSparkReporter(faith);
+//        spark = new ExtentSparkReporter("C:/Users/digilink/Downloads/SeleniumRevision/LumaAssessment/src/test/java/extentReport/spark.html");
         extent.attachReporter(spark);
         spark.config().setTheme(Theme.DARK);
-        spark.config().setDocumentTitle("Automation Report");
+        spark.config().setDocumentTitle(" Luma Automation Report");
         spark.config().setReportName("Extent Reports");
         driver = BaseTests.driver;
     }
 
     public static ExtentTest createTest(String testcasename) {
-        ExtentTest test = extent.createTest(testcasename);
+         test = extent.createTest(testcasename);
         return test;
     }
 
@@ -53,19 +56,22 @@ public  class ExtentReport {
 
 
 
-//    public static String getScreenshotAsBase64() throws IOException {
-//        File source = ((TakesScreenshot) BaseTests.driver).getScreenshotAs(OutputType.FILE);
-//        String path = System.getProperty("user.dir") + "src/test/java/extentReport/Screenshots/image.png";
-//        FileUtils.copyFile(source, new File(path));
-//        return path;
-//
-////        byte[] imageBytes = IOUtils.toByteArray(new FileInputStream(path));
-////        return Base64.getEncoder().encodeToString(imageBytes);
-//    }
+
+
+  /*  public static String getScreenshotAsBase64() throws IOException {
+        File source = ((TakesScreenshot) BaseTests.driver).getScreenshotAs(OutputType.FILE);
+        String path = System.getProperty("user.dir") + "src/test/java/extentReport/Screenshots/image.png";
+        FileUtils.copyFile(source, new File(path));
+        return path;
+        byte[] imageBytes = IOUtils.toByteArray(new FileInputStream(path));
+        return Base64.getEncoder().encodeToString(imageBytes);
+    }
+
+   */
 
     @AfterSuite
     public static void flushReports() throws IOException {
         extent.flush();
-        Desktop.getDesktop().browse(new File("C:/Users/digilink/Downloads/SeleniumRevision/LumaAssessment/src/test/java/extentReport/spark.html").toURI());
+        Desktop.getDesktop().browse(new File(faith).toURI());
     }
 }

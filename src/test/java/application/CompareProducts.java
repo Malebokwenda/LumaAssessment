@@ -20,32 +20,24 @@ import static extentReport.ExtentReport.extent;
 import static extentReport.ExtentReport.getScreenshot;
 
 
-public class CompareProducts {
+public class CompareProducts extends  BaseTests{
     WebDriver driver = BaseTests.driver;
     static WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
-    @BeforeSuite
-    public static void beforeSuite() {
-        ExtentReport.initReports();
-    }
 
-    @AfterSuite
-    public static void afterSuite() throws IOException {
-        ExtentReport.flushReports();
-    }
-
-    public static void hotSellersScroll(){
+    public static void scrollToHotSellers(){
 
         JavascriptExecutor js = (JavascriptExecutor)BaseTests.driver;
         WebElement RadiantTee = BaseTests.driver.findElement(By.xpath("(//img[@alt='Radiant Tee'])[1]"));
         js.executeScript("arguments[0].scrollIntoView();", RadiantTee);
 
     }
-    public static  void CompareIcon() throws IOException {
-        ExtentTest test = extent.createTest("Hover on item to add to product compare");
-        test.info("User clicks an img to add item to compare");
+    public static  void HoverToClickCompareIcon() throws IOException {
+        ExtentReport.test.info("User clicks an img to add item to compare");
 //          selected colour so that the hover won't disappear
-        BaseTests.driver.findElement(By.xpath("//*[@id=\"option-label-color-93-item-57\"]")).click();
-        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("CompareIcon")).build());
+        WebElement hoverColor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@id='option-label-color-93-item-57'])[1]")));
+        hoverColor.click();
+//        BaseTests.driver.findElement(By.xpath("(//div[@id='option-label-color-93-item-57'])[1]")).click();
+        ExtentReport.test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("CompareIcon")).build());
 //        click add to compare button
         BaseTests.driver.findElement(By.xpath("(//a[@title='Add to Compare'])[1]")).click();
 
@@ -53,8 +45,7 @@ public class CompareProducts {
 
     }
     public static  void compareOnImgClicked() throws IOException {
-        ExtentTest test = extent.createTest("Product Compare on Img");
-        test.info("User clicks an img to add item to compare");
+        ExtentReport.test.info("User clicks an img to add item to compare");
 //        find product to compare
       WebElement BreatheTank = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//img[@alt='Breathe-Easy Tank'])[1]")));
         BreatheTank.click();
@@ -62,7 +53,7 @@ public class CompareProducts {
 
          WebElement CompareButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[contains(text(),'Add to Compare')])[1]")));
         CompareButton.click();
-        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("compareOnImgClicked")).build());
+       ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("compareOnImgClicked")).build());
 
 
 
@@ -75,14 +66,15 @@ public class CompareProducts {
 
      }
      public static void removeComparedItem() throws IOException {
-         ExtentTest test = extent.createTest("Product Compare on Img");
-         test.info("User is removing item on product compare page");
+         ExtentReport.test.info("User is removing item on product compare page");
         WebElement removeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[@title='Remove Product'])[1]")));
          removeElement.click();
-         test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("removeComparedItem")).build());
+//         test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("removeComparedItem")).build());
 
          WebElement okAlertButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/aside[2]/div[2]/footer/button[2]")));
          okAlertButton.click();
+         ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("remove Compared Item")).build());
+
      }
 
     public static void compareListLink(){

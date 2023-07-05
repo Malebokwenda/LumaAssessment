@@ -15,17 +15,8 @@ import static extentReport.ExtentReport.*;
 
 public class Login extends BaseTests{
     WebDriver driver = BaseTests.driver;
-    @BeforeSuite
-    public static void beforeSuite() {
-        ExtentReport.initReports();
-    }
-
-    @AfterSuite
-    public static void afterSuite() throws IOException {
-        ExtentReport.flushReports();
-    }
     public static void signIn(String Email, String password) throws IOException {
-        ExtentTest test = extent.createTest("Sign In");
+
         test.info("User entered correct credentials");
         BaseTests.driver.findElement(By.xpath("(//a[contains(text(),'Sign In')])[1]")).click();
 
@@ -34,7 +25,7 @@ public class Login extends BaseTests{
 
         WebElement passwordInput = BaseTests.driver.findElement(By.xpath("(//input[@id='pass'])[1]"));
         passwordInput.sendKeys(password);
-        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("Sign In")).build());
+        test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("Sign In")).build());
 
         BaseTests.driver.findElement(By.xpath("(//span[contains(text(),'Sign In')])[1]")).click();
 

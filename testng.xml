@@ -3,7 +3,7 @@
 <suite name="ConcurrentTestSuite" parallel="tests">
     <listeners>
 
-        <listener class-name="extentReport.ExtentTestNGListener"></listener>
+<!--        <listener class-name="extentReport.ExtentTestNGListener"></listener>-->
     </listeners>
     <test name="ChromeTest">
         <parameter name="browser" value="chrome" />

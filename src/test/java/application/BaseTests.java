@@ -1,5 +1,6 @@
 package application;
 
+import com.aventstack.extentreports.Status;
 import extentReport.ExtentReport;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import utilities.Utilities;
+import utilities.ExcelReader;
 /*import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -18,13 +19,11 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 import static extentReport.ExtentReport.extent;
-import static extentReport.ExtentReport.getScreenshot;
-
-@Listeners(extentReport.ExtentTestNGListener.class)
+//@Listeners(extentReport.ExtentTestNGListener.class)
 
 public class BaseTests {
     public static WebDriver driver;
-    private Utilities excelData;
+    private ExcelReader excelData;
     private String username;
     private String password;
     private String Email;
@@ -49,6 +48,16 @@ public class BaseTests {
     public static void afterSuite() throws IOException {
         ExtentReport.flushReports();
     }
+    @AfterMethod
+    public  void getResult(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            ExtentReport.test.log(Status.FAIL, result.getThrowable());
+        } else if (result.getStatus() == ITestResult.SUCCESS) {
+            ExtentReport.test.log(Status.PASS, result.getTestName());
+        } else {
+            ExtentReport.test.log(Status.SKIP, result.getTestName());
+        }
+    }
     @Parameters("browser")
     @BeforeClass
     public void setUp(String browser) throws IOException {
@@ -69,72 +78,75 @@ public class BaseTests {
         driver.manage().window().maximize();
         driver.get("https://magento.softwaretestingboard.com ");
 
-        excelData = new Utilities();
-        Utilities.setupExcel();
+        excelData = new ExcelReader();
+        ExcelReader.setupExcel();
     }
+
 
 
     @Test(priority = 1)
     public void signIn() throws IOException {
-        Email = Utilities.getCellData(1,3);
-        password = Utilities.getCellData(1,4);
+        ExtentReport.test= extent.createTest("Sign In");
+        Email = ExcelReader.getCellData(1,3);
+        password = ExcelReader.getCellData(1,4);
         Login.signIn(Email,password);
         Login.goTo();
 
     }
-    @Test(priority = 2)
-    public static void tees() throws InterruptedException, IOException {
-        Tees.tees();
-        Tees.threeStarsTee();
-        Cart.threeStarsAddToCart();
-        Validation.EmptyFields();
-        Thread.sleep(2500);
-
-
-    }
-
-
-
-
-      /*  @Test(priority = 3)
-        public void pullOverAddToCart() throws InterruptedException {
+//      @Test(priority = 2)
+//    public static void tees() throws InterruptedException, IOException {
+//    ExtentReport.test = extent.createTest("Three Stars Tee");
+//        Tees.tees();
+//        Tees.threeStarsTee();
+//        Cart.threeStarsAddToCart();
+//        Validation.EmptyFields();
+//        Thread.sleep(2500);
+//
+//
+//    }
+        @Test(priority = 3)
+        public void pullOverAddToCart() throws InterruptedException, IOException {
+            ExtentReport.test = extent.createTest("Tees");
             Login.goTo();
-            productName = Utilities.getCellData(1,5);
+            productName = ExcelReader.getCellData(1,5);
             Tees.searchForItem(productName);
             Tees.pullOverItem();
             Cart.PulloverAddToCart();
             Validation.itemAddedToCart();
         }
        @Test(priority = 4)
-        public void checkOut(){
-            Cart.cartIcon();
-
-            FirstName = Utilities.getCellData(1,1);
-            LastName = Utilities.getCellData(1,2);
-            SCompany = Utilities.getCellData(1,8);
-            SCountry = Utilities.getCellData(1,9);
-            SAddress =  Utilities.getCellData(1,10);
-            SCity =  Utilities.getCellData(1,11);
-            SProvince = Utilities.getCellData(1,12);
-            SCode= String.valueOf(Utilities.getCellInt(1,13));
-            SPhone =String.valueOf(Utilities.getCellInt(1,14));
-            Checkout.shippingInfo( FirstName,LastName,  SCompany,  SCountry,  SAddress, SCity,  SProvince,  SCode,SPhone);
+        public void checkOut() throws IOException {
+           ExtentReport.test = extent.createTest("Checkout");
+            Cart.clickCartIcon();
+            FirstName = ExcelReader.getCellData(1,1);
+            LastName = ExcelReader.getCellData(1,2);
+            SCompany = ExcelReader.getCellData(1,8);
+            SCountry = ExcelReader.getCellData(1,9);
+            SAddress =  ExcelReader.getCellData(1,10);
+            SCity =  ExcelReader.getCellData(1,11);
+            SProvince = ExcelReader.getCellData(1,12);
+            SCode= String.valueOf(ExcelReader.getCellInt(1,13));
+            SPhone =String.valueOf(ExcelReader.getCellInt(1,14));
+            Checkout.captureShippingInfo( FirstName,LastName,  SCompany,  SCountry,  SAddress, SCity,  SProvince,  SCode,SPhone);
 
         }
 
 
-    @Test(priority = 5)
-    public void hotSellersCompare() {
+
+   /* @Test(priority = 5)
+    public void hotSellersCompare() throws IOException {
+    ExtentReport.test = extent.createTest("Compare Product hovering over Image");
         Login.goTo();
-        CompareProducts.hotSellersScroll();
-        CompareProducts.CompareIcon();
+        CompareProducts.scrollToHotSellers();
+        CompareProducts.HoverToClickCompareIcon();
         CompareProducts.compareListLink();
     }
 
     @Test(priority = 6)
-    public void compareOnImgClicked() {
+    public void compareItemOnImgClicked() throws IOException {
+    ExtentReport.test = extent.createTest("Compare product on image clicked");
         Login.goTo();
-        CompareProducts.hotSellersScroll();
+        CompareProducts.scrollToHotSellers();
         CompareProducts.compareOnImgClicked();
         Validation.compareSuccessText();
         CompareProducts.compareListLink();
@@ -142,25 +154,29 @@ public class BaseTests {
     }
 
     @Test(priority = 7)
-    public static void weatherTankProduct() {
+    public static void weatherTankProduct() throws IOException {
+    ExtentReport.test = extent.createTest("Remove item from Compare Products");
         Login.goTo();
-        CompareProducts.hotSellersScroll();
+        CompareProducts.scrollToHotSellers();
         CompareProducts.weatherTankProduct();
         CompareProducts.compareListLink();
         CompareProducts.removeComparedItem();
     }
     @Test(priority = 8)
     public static void heroHoodie(){
+    ExtentReport.test = extent.createTest("Add item to cart hovering over image");
         Login.goTo();
-        CompareProducts.hotSellersScroll();
+        CompareProducts.scrollToHotSellers();
         Tees.heroHoodie();
-        Cart.heroHoodieCart();
+        Cart.heroHoodieCartButton();
 
     }
 
     */
-    @AfterClass
-    public void tearDown(){
-        driver.quit();
-    }
+
+
+//    @AfterClass
+//    public void tearDown(){
+//        driver.quit();
+//    }
 }

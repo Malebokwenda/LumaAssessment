@@ -16,28 +16,19 @@ import static extentReport.ExtentReport.*;
 
 public class Cart extends BaseTests{
     WebDriver driver = BaseTests.driver;
-    @BeforeSuite
-    public static void beforeSuite() {
-        ExtentReport.initReports();
-    }
-
-    @AfterSuite
-    public static void afterSuite() throws IOException {
-        ExtentReport.flushReports();
-    }
 
     public static void threeStarsAddToCart() throws IOException {
-        ExtentTest test = extent.createTest("Add 3 stars Item to cart");
+
         test.info("User adds a 3 stars product to cart");
 
         BaseTests.driver.findElement(By.xpath("(//button[@id='product-addtocart-button'])[1]")).click();
-        test.pass("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("AddToCart")).build());
+        test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("AddToCart")).build());
     }
     public static void PulloverAddToCart(){
         BaseTests.driver.findElement(By.xpath("(//span[contains(text(),'Add to Cart')])[1]")).click();
 
     }
-    public static void cartIcon(){
+    public static void clickCartIcon(){
         BaseTests.driver.findElement(By.xpath("(//a[@class='action showcart'])[1]")).click();
         Actions actions = new Actions(BaseTests.driver);
 
@@ -45,7 +36,7 @@ public class Cart extends BaseTests{
         actions.moveToElement(proceedToCheckout).click().perform();
 
     }
-    public static  void heroHoodieCart(){
+    public static  void heroHoodieCartButton(){
         BaseTests.driver.findElement(By.xpath("//*[@id=\"maincontent\"]/div[3]/div/div[2]/div[3]/div/div/ol/li[4]/div/div/div[3]/div/div[1]/form/button")).click();
 
     }

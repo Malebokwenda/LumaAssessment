@@ -1,22 +1,30 @@
 package application;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import extentReport.ExtentReport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import java.io.IOException;
 import java.time.Duration;
+import static extentReport.ExtentReport.extent;
+import static extentReport.ExtentReport.getScreenshot;
 
-public class Checkout {
+public class Checkout extends   BaseTests{
     WebDriver driver = BaseTests.driver;
     static WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
 
-    public static void shippingInfo(String FirstName, String LastName, String SCompany, String SCountry, String SAddress, String SCity, String SProvince, String SCode, String SPhone){
+
+    public static void captureShippingInfo(String FirstName, String LastName, String SCompany, String SCountry, String SAddress, String SCity, String SProvince, String SCode, String SPhone) throws IOException {
+        ExtentReport.test.info("User is filling shipping information");
 //        Fill in personal info
-        WebElement firstNameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("firstname")));
+        WebElement firstNameInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[contains(@name, \"firstname\")]")));
         firstNameInput.clear();
         firstNameInput.sendKeys(FirstName);
 
@@ -62,16 +70,15 @@ public class Checkout {
         cellNumberInput.sendKeys(SPhone);
 
 //        shipping method
-
-        WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
-        WebElement shippingMethod= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/main/div[2]/div/div[2]/div[4]/ol/li[2]/div/div[3]/form/div[1]/table/tbody/tr/td[1]/input")));
+        WebElement shippingMethod= wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("(//input[@name='ko_unique_2'])[1]")));
         Actions actions = new Actions(BaseTests.driver);
         actions.moveToElement(shippingMethod).click().perform();
 
         BaseTests.driver.findElement(By.xpath("//*[@id=\"shipping-method-buttons-container\"]/div/button/span")).click();
-
+        ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("Shipping Info")).build());
 //        place order
-         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"shipping-method-buttons-container\"]/div/button"))).click();
+         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"shipping-method-buttons-container\"]/div/button"))).click();
 //        BaseTests.driver.findElement(By.className("(//span[normalize-space()='Next'])[1]")).click();
 
 
