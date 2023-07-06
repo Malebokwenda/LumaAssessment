@@ -34,9 +34,6 @@ public class CompareProducts extends  BaseTests{
 //        click add to compare button
         BaseTests.driver.findElement(By.xpath("(//a[@title='Add to Compare'])[1]")).click();
         Thread.sleep(1500);
-
-
-
     }
     public static  void compareOnImgClicked() throws IOException, InterruptedException {
         ExtentReport.test.info("User clicks an img to add item to compare");

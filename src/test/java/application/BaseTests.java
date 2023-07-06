@@ -1,5 +1,4 @@
 package application;
-
 import com.aventstack.extentreports.Status;
 import extentReport.ExtentReport;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -11,13 +10,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import utilities.ExcelReader;
-/*import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-
- */
-
 import java.io.IOException;
-
 import static extentReport.ExtentReport.extent;
 //@Listeners(extentReport.ExtentTestNGListener.class)
 
@@ -85,7 +78,7 @@ public class BaseTests {
 
 
 
-    @Test(priority = 1)
+    @Test(priority = 1,groups = "Login")
     public void LogIn() throws IOException {
         ExtentReport.test= extent.createTest("Sign In");
         Email = ExcelReader.getCellData(1,3);
@@ -94,17 +87,17 @@ public class BaseTests {
         Login.goTo();
 
     }
-      @Test(priority = 2)
-    public static void tees() throws InterruptedException, IOException {
+      @Test(priority = 2,groups = "Tees")
+    public static void addProductToCartWithoutOptions() throws InterruptedException, IOException {
     ExtentReport.test = extent.createTest("Three Stars Tee");
-        Tees.tees();
-        Tees.threeStarsTee();
+        Tees.navigateToTopsTees();
+        Tees.selectThreeStarsTee();
         Cart.threeStarsAddToCart();
         Validation.EmptyFields();
         Thread.sleep(2500);
     }
 
-   @Test(priority = 3)
+   @Test(priority = 3,groups = "hotSellers")
     public void hotSellersCompare() throws IOException, InterruptedException {
     ExtentReport.test = extent.createTest("Compare Product hovering over Image");
         Login.goTo();
@@ -113,7 +106,7 @@ public class BaseTests {
         CompareProducts.compareListLink();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4,groups = "compareImgClicked")
     public void compareItemOnImgClicked() throws IOException, InterruptedException {
     ExtentReport.test = extent.createTest("Compare product on image clicked");
         Login.goTo();
@@ -124,7 +117,7 @@ public class BaseTests {
 
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5,groups = "weatherTankProduct")
     public static void weatherTankProduct() throws IOException, InterruptedException {
     ExtentReport.test = extent.createTest("Remove item from Compare Products");
         Login.goTo();
@@ -134,7 +127,7 @@ public class BaseTests {
         CompareProducts.removeComparedItem();
         Validation.removedItemText();
     }
-    @Test(priority = 6)
+    @Test(priority = 6,groups = "heroHoodie")
     public static void heroHoodie() throws IOException {
     ExtentReport.test = extent.createTest("Add item to cart hovering over image");
         Login.goTo();
@@ -143,7 +136,7 @@ public class BaseTests {
         Cart.heroHoodieCartButton();
 
     }
-    @Test(priority = 7)
+    @Test(priority = 7,groups = "pulloverItem")
     public void pullOverAddToCart() throws InterruptedException, IOException {
         ExtentReport.test = extent.createTest("Search for item");
         Login.goTo();
@@ -151,10 +144,10 @@ public class BaseTests {
         Tees.searchForItem(productName);
         Tees.scrollToMikoPullover();
         Tees.pullOverItem();
-        Cart.PulloverAddToCart();
+        Cart.addPulloverToCart();
         Validation.itemAddedToCart();
     }
-    @Test(priority = 8)
+    @Test(priority = 8,groups = "checkout")
     public void checkOut() throws IOException {
         ExtentReport.test = extent.createTest("Checkout");
         Cart.clickCartIcon();
@@ -171,12 +164,8 @@ public class BaseTests {
 
     }
 
-
-
-   /* @AfterClass
+ @AfterClass
     public void tearDown(){
         driver.quit();
     }
-
-    */
 }

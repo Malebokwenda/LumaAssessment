@@ -20,7 +20,7 @@ public class Cart extends BaseTests{
     public static void threeStarsAddToCart() throws IOException {
         BaseTests.driver.findElement(By.xpath("(//button[@id='product-addtocart-button'])[1]")).click();
     }
-    public static void PulloverAddToCart(){
+    public static void addPulloverToCart(){
         BaseTests.driver.findElement(By.xpath("(//span[contains(text(),'Add to Cart')])[1]")).click();
 
     }

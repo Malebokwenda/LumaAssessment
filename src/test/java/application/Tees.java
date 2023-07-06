@@ -17,7 +17,7 @@ public class Tees extends  BaseTests{
     WebDriver driver = BaseTests.driver;
     static Actions actions = new Actions(BaseTests.driver);
     static WebDriverWait wait = new WebDriverWait(BaseTests.driver, Duration.ofSeconds(10));
-    public static void tees() throws InterruptedException, IOException {
+    public static void navigateToTopsTees() throws InterruptedException, IOException {
         ExtentReport.test.info("User  hovers from men to tees to find an item ");
 //        hover on men
         WebElement element =
@@ -34,7 +34,7 @@ public class Tees extends  BaseTests{
 
     }
 
-    public static void threeStarsTee() throws IOException {
+    public static void selectThreeStarsTee() throws IOException {
         ExtentReport.test.info("user looks for a 3 starts item to add to cart");
         ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("three StarTee")).build());
 //       find 3 stars product item  to adds to cart

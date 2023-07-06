@@ -5,7 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
 
-public class Utilities {
+public class ExcelReader {
     static XSSFWorkbook workbook;
     static XSSFSheet sheet;
 

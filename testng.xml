@@ -6,18 +6,23 @@
     </listeners>
     <test name="ChromeTest">
         <parameter name="browser" value="chrome" />
-        <!--        <groups>-->
-        <!--            <run>-->
-        <!--                <exclude name="validLogin"></exclude>-->
-        <!--                <exclude name="checkOut"></exclude>-->
-        <!--            </run>-->
-        <!--        </groups>-->
         <classes>
             <class name="application.BaseTests" />
         </classes>
     </test>
 <!--    <test name="EdgeTest">-->
 <!--        <parameter name="browser" value="edge"/>-->
+<!--        <groups>-->
+<!--            <run>-->
+
+<!--                <exclude name="hotSellers"></exclude>-->
+<!--                <exclude name="compareImgClicked"></exclude>-->
+<!--                <exclude name="weatherTankProduct"></exclude>-->
+<!--                <exclude name="heroHoodie"></exclude>-->
+<!--                <exclude name="pulloverItem"></exclude>-->
+<!--                <exclude name="checkout"></exclude>-->
+<!--            </run>-->
+<!--        </groups>-->
 <!--        <classes>-->
 <!--            <class name="application.BaseTests"/>-->
 <!--        </classes>-->
