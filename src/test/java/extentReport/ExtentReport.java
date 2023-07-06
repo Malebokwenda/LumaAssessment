@@ -26,13 +26,12 @@ public  class ExtentReport {
      public static ExtentTest test;
     private static ExtentSparkReporter spark;
    static String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-   static String faith ="C:/Users/digilink/Downloads/SeleniumRevision/LumaAssessment/src/test/java/extentReport/spark_" +timeStamp +".html";
+   static String FileReporter ="C:/Users/digilink/Downloads/SeleniumRevision/LumaAssessment/src/test/java/extentReport/spark_" +timeStamp +".html";
     private static WebDriver driver;
     @BeforeSuite
     public static void initReports() {
         extent = new ExtentReports();
-        spark = new ExtentSparkReporter(faith);
-//        spark = new ExtentSparkReporter("C:/Users/digilink/Downloads/SeleniumRevision/LumaAssessment/src/test/java/extentReport/spark.html");
+        spark = new ExtentSparkReporter(FileReporter);
         extent.attachReporter(spark);
         spark.config().setTheme(Theme.DARK);
         spark.config().setDocumentTitle(" Luma Automation Report");
@@ -54,10 +53,6 @@ public  class ExtentReport {
         return path;
     }
 
-
-
-
-
   /*  public static String getScreenshotAsBase64() throws IOException {
         File source = ((TakesScreenshot) BaseTests.driver).getScreenshotAs(OutputType.FILE);
         String path = System.getProperty("user.dir") + "src/test/java/extentReport/Screenshots/image.png";
@@ -72,6 +67,6 @@ public  class ExtentReport {
     @AfterSuite
     public static void flushReports() throws IOException {
         extent.flush();
-        Desktop.getDesktop().browse(new File(faith).toURI());
+        Desktop.getDesktop().browse(new File(FileReporter).toURI());
     }
 }

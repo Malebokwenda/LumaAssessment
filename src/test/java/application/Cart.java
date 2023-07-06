@@ -18,11 +18,7 @@ public class Cart extends BaseTests{
     WebDriver driver = BaseTests.driver;
 
     public static void threeStarsAddToCart() throws IOException {
-
-        test.info("User adds a 3 stars product to cart");
-
         BaseTests.driver.findElement(By.xpath("(//button[@id='product-addtocart-button'])[1]")).click();
-        test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("AddToCart")).build());
     }
     public static void PulloverAddToCart(){
         BaseTests.driver.findElement(By.xpath("(//span[contains(text(),'Add to Cart')])[1]")).click();
@@ -36,7 +32,8 @@ public class Cart extends BaseTests{
         actions.moveToElement(proceedToCheckout).click().perform();
 
     }
-    public static  void heroHoodieCartButton(){
+    public static  void heroHoodieCartButton() throws IOException {
+        ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("Hero Hoodie")).build());
         BaseTests.driver.findElement(By.xpath("//*[@id=\"maincontent\"]/div[3]/div/div[2]/div[3]/div/div/ol/li[4]/div/div/div[3]/div/div[1]/form/button")).click();
 
     }

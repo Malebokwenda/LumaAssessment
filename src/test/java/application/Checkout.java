@@ -45,11 +45,12 @@ public class Checkout extends   BaseTests{
         WebElement cityInput = BaseTests.driver.findElement(By.name("city"));
         cityInput.clear();
         cityInput.sendKeys(SCity);
+        ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("Shipping Info1")).build());
+
 
 //        Select country
-        WebElement  countryDropdown = BaseTests.driver.findElement
-                (By.xpath("/html/body/div[1]/main/div[2]/div/div[2]" +
-                        "/div[4]/ol/li[1]/div[2]/form/div/div[8]/div/select"));
+        WebElement  countryDropdown = wait.until(ExpectedConditions.presenceOfElementLocated
+                (By.xpath("//*[@id=\"KXK8X9A\"]")));
         Select countrySelect = new Select(countryDropdown);
         countrySelect.selectByVisibleText(SCountry);
 
@@ -57,6 +58,7 @@ public class Checkout extends   BaseTests{
 //        province
         WebElement  provinceInput = BaseTests.driver.findElement(By.name("region"));
         provinceInput.sendKeys(SProvince);
+
 
 //      postal code
         WebElement zipInput = BaseTests.driver.findElement(By.name("postcode"));
@@ -78,8 +80,7 @@ public class Checkout extends   BaseTests{
         BaseTests.driver.findElement(By.xpath("//*[@id=\"shipping-method-buttons-container\"]/div/button/span")).click();
         ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("Shipping Info")).build());
 //        place order
-         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"shipping-method-buttons-container\"]/div/button"))).click();
-//        BaseTests.driver.findElement(By.className("(//span[normalize-space()='Next'])[1]")).click();
+         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@class='primary'])[3]"))).click();
 
 
     }

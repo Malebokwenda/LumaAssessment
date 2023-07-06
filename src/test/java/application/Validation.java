@@ -45,8 +45,15 @@ public class Validation extends BaseTests{
         String actualAddedItemMessage = AddedMessage.getText() ;
         Assert.assertEquals(actualAddedItemMessage,expectedAddedItemMessage );
         ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("compareSuccessText")).build());
-
-
+    }
+    public static void removedItemText() throws IOException {
+        ExtentReport.test.info("User has removed an item from compare products");
+        WebElement AddedMessage = wait.until(ExpectedConditions.presenceOfElementLocated
+                (By.xpath("(//div[@data-bind='html: $parent.prepareMessageForHtml(message.text)'])[1]")));
+        String expectedAddedItemMessage = "You removed product Argus All-Weather Tank from the comparison list.";
+        String actualAddedItemMessage = AddedMessage.getText() ;
+        Assert.assertEquals(actualAddedItemMessage,expectedAddedItemMessage );
+        ExtentReport.test.info("Value entered", MediaEntityBuilder.createScreenCaptureFromPath(getScreenshot("removedItemText")).build());
 
     }
 }

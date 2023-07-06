@@ -15,7 +15,7 @@ import static extentReport.ExtentReport.*;
 
 public class Login extends BaseTests{
     WebDriver driver = BaseTests.driver;
-    public static void signIn(String Email, String password) throws IOException {
+    public static void LogIn(String Email, String password) throws IOException {
 
         test.info("User entered correct credentials");
         BaseTests.driver.findElement(By.xpath("(//a[contains(text(),'Sign In')])[1]")).click();
